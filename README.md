@@ -4,10 +4,6 @@ Projeto desenvolvido como avaliação final do módulo de Spring Boot do curso +
 # Diagrama de Classes
 
 <p align="center">
-   <img alt="digrams-de-classes" src="" 
-  width="80%">
-  <br>
-  <br>
-  <img alt="endpoints" src="" 
+   <img alt="digrama-de-classes" src="https://github.com/NeoJhonn/ScheduEase/blob/main/Documentation/Class_Diagram.png" 
   width="80%">
 </p>

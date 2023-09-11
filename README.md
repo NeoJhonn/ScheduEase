@@ -30,6 +30,9 @@ Agenda
 - Spring Boot Framework.
 - Cobertura mínima de código de 50%(testes unitários).
 - Banco de Dados em Postgres.
+- Documentação das API’s no Swagger.
+- Maven para gerenciamento das dependências do projeto.
+- Flyway para gerenciamento dos migrations do projeto.
 
 # Regras de Negócio
 - A aplicação deve permitir o agendamento de um horário para todo o ano das 8 às 22 horas.

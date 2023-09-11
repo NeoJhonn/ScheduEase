@@ -7,7 +7,7 @@ respectivos clientes.
 
 <p align="center">
    <img alt="digrama-de-classes" src="https://github.com/NeoJhonn/ScheduEase/blob/main/Documentation/Class_Diagram.png" 
-  width="80%">
+  width="80%" border-radio= 10px>
 </p>
 
 # Requsitos Funcionais

@@ -26,5 +26,11 @@ Agenda
 - Pesquisar um horário pelo nome cliente agendado.
   
 # Requsitos Não Funcionais
+- Desenvolvido em Java.
+- Spring Boot Framework.
+- Cobertura mínima de código de 50%(testes unitários).
+- Banco de Dados em Postgres.
 
 # Regras de Negócio
+- A aplicação deve permitir o agendamento de um horário para todo o ano das 8 às 22 horas.
+- A aplicação deve listar os horários agendados e disponíveis do dia selecionado de seu respectivo funcionário/profissional.

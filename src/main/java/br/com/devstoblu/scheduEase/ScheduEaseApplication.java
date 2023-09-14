@@ -1,4 +1,4 @@
-package br.com.devtoblu.scheduEase;
+package br.com.devstoblu.scheduEase;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -6,7 +6,7 @@ respectivos clientes.
 # Diagrama de Classes
 
 <p align="center">
-   <img alt="digrama-de-classes" src="https://github.com/NeoJhonn/ScheduEase/blob/main/Documentation/Class_Diagram.png" 
+   <img alt="digrama-de-classes" src=".github/Class_Diagram.png" 
   width="80%">
 </p>
 

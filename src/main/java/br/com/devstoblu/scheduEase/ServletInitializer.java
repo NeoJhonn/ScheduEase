@@ -1,4 +1,4 @@
-package br.com.devtoblu.scheduEase;
+package br.com.devstoblu.scheduEase;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

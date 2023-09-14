@@ -1,37 +1,48 @@
-package br.com.devstoblu.scheduEase.entities;
+package br.com.devstoblu.scheduEase.dtos;
 
+import br.com.devstoblu.scheduEase.entities.Employee;
 import br.com.devstoblu.scheduEase.enums.TimeGrid;
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Table(name = "tb-schedule")
-public class Schedule {
+public class ScheduleDTO implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Serial
+    private static final long serialVersionUID = 42L;
     private Long id;
-    @JoinColumn(name = "employee_id")
+
+    @NotNull(message = "O horário precisa esta vinculado a um profissional.")
     private Employee employeeId;
-    @Column(nullable = false)
+
+    @NotBlank(message = "O campo nome do Cliente não pode estar em branco.")
+    @NotEmpty(message = "O campo nome do Cliente não pode estar vazio.")
     private String clientName;
-    @Column(nullable = false)
+
+    @NotBlank(message = "O campo Serviço Agendado não pode estar em branco.")
+    @NotEmpty(message = "O campo Serviço Agendado não pode estar vazio.")
     private String serviceBooked;
-    @Column(nullable = false)
+
+    @NotNull(message = "Selecione uma data para fazer o agendamento.")
     private Date appointmentDate;
-    @Column(nullable = false)
-    @Enumerated(value = EnumType.STRING)
+
+    @NotBlank(message = "O campo Horário Início não pode estar em branco.")
+    @NotEmpty(message = "O campo Horário Início não pode estar vazio.")
     private TimeGrid startTime;
-    @Column(nullable = false)
-    @Enumerated(value = EnumType.STRING)
+
+    @NotBlank(message = "O campo Horário Fim não pode estar em branco.")
+    @NotEmpty(message = "O campo Horário Fim não pode estar vazio.")
     private TimeGrid endTime;
 
-    public Schedule() {
+    public ScheduleDTO() {
 
     }
 
-    public Schedule(Long id, Employee employeeId, String clientName, String serviceBooked
+    public ScheduleDTO(Long id, Employee employeeId, String clientName, String serviceBooked
             , Date appointmentDate, TimeGrid startTime, TimeGrid endTime) {
         this.id = id;
         this.employeeId = employeeId;
@@ -100,9 +111,9 @@ public class Schedule {
 
     @Override
     public String toString() {
-        return "Schedule{" +
+        return "ScheduleDTO{" +
                 "id=" + id +
-                ", employeeId=" + employeeId +
+                ", Profissional=" + employeeId.getName() +
                 ", clientName='" + clientName + '\'' +
                 ", serviceBooked='" + serviceBooked + '\'' +
                 ", appointmentDate=" + appointmentDate +

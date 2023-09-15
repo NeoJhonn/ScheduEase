@@ -1,13 +1,12 @@
-package br.com.devstoblu.scheduEase.entities;
+package br.com.devstoblu.scheduEase.models.entities;
 
 import br.com.devstoblu.scheduEase.enums.EmployeeRole;
 import jakarta.persistence.*;
-import jdk.jfr.Enabled;
 
 import java.util.List;
 
 @Entity
-@Table(name = "tb-employee")
+@Table(name = "tb_employee")
 public class Employee {
 
     @Id

@@ -1,17 +1,19 @@
-package br.com.devstoblu.scheduEase.entities;
+package br.com.devstoblu.scheduEase.models.entities;
 
 import br.com.devstoblu.scheduEase.enums.TimeGrid;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CollectionId;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "tb-schedule")
+@Table(name = "tb_schedule")
 public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
     private Employee employeeId;
     @Column(nullable = false)

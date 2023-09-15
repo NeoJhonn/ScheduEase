@@ -1,6 +1,5 @@
-package br.com.devstoblu.scheduEase.dtos;
+package br.com.devstoblu.scheduEase.models.dtos;
 
-import br.com.devstoblu.scheduEase.entities.Schedule;
 import br.com.devstoblu.scheduEase.enums.EmployeeRole;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

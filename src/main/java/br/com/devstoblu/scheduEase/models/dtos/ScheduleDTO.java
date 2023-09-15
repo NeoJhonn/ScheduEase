@@ -1,6 +1,6 @@
-package br.com.devstoblu.scheduEase.dtos;
+package br.com.devstoblu.scheduEase.models.dtos;
 
-import br.com.devstoblu.scheduEase.entities.Employee;
+import br.com.devstoblu.scheduEase.models.entities.Employee;
 import br.com.devstoblu.scheduEase.enums.TimeGrid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

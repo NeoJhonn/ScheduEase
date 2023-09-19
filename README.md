@@ -10,7 +10,7 @@ respectivos clientes.
   width="80%">
 </p>
 
-# Requsitos Funcionais
+# Requisitos Funcionais
 Funcionário
 - Cadastramento de funcionários.
 - Exclusão de um cadastro de funcionário.
@@ -25,7 +25,7 @@ Agenda
 - Listar horários cadastrados.
 - Pesquisar um horário pelo nome cliente agendado.
   
-# Requsitos Não Funcionais
+# Requisitos Não Funcionais
 - Desenvolvido em Java.
 - Spring Boot Framework.
 - Cobertura mínima de código de 50%(testes unitários).

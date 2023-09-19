@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface IEmployeeService {
 
-    void addEmployee(EmployeeDTO employeeDTO);
+    Long addEmployee(EmployeeDTO employeeDTO) throws Exception;
     void deleteEmployee(Long id);
-    void updateEmployee(EmployeeDTO employeeDTO);
+    Long updateEmployee(EmployeeDTO employeeDTO) throws Exception;
     List<EmployeeDTO> listEmployees();
     EmployeeDTO searchAnEmployee(String name);
 

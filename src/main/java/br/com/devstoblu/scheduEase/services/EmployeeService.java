@@ -44,22 +44,44 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public EmployeeDTO searchAnEmployee(String name) {
+    public EmployeeDTO searchAnEmployee(String name) throws Exception {
 
-        return mapper.map(repository.findByName(name), EmployeeDTO.class);
+        try {
+            EmployeeDTO employeeSearched = mapper.map(repository.findByName(name), EmployeeDTO.class);
+            if (employeeSearched == null) {
+                throw new Exception(EMPLOYEE_SEARCHED_NAME_ERROR);
+            }
+            return employeeSearched;
+        } catch (Exception e) {
+            throw new Exception(EMPLOYEE_SEARCHED_NAME_ERROR);
+        }
+    }
+
+    @Override
+    public EmployeeDTO searchAnEmployeeById(Long id) {
+        return mapper.map(repository.findById(id), EmployeeDTO.class);
     }
 
     public Long save(EmployeeDTO employeeDTO) throws Exception {
+        Boolean hasSameName = false;
 
         try {
+            // verificar se já existe um profissional com o mesmo nome cadastrado
+            if (repository.findByName(employeeDTO.getName()) != null) {
+                hasSameName = true;
+                throw new Exception(EMPLOYEE_INSERT_NAME_ERROR);
+            }
+
             Employee employee = mapper.map(employeeDTO, Employee.class);
             Employee created = repository.save(employee);
             return created.getId();
 
         } catch (Exception e) {
-            throw new Exception(EMPLOYEE_INSERT_ERROR);
+            if (hasSameName) {
+                throw new Exception(EMPLOYEE_INSERT_NAME_ERROR);
+            } else {
+                throw new Exception(EMPLOYEE_INSERT_ERROR);
+            }
         }
     }
-
-    
 }

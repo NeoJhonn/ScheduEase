@@ -11,6 +11,7 @@ public interface IEmployeeService {
     void deleteEmployee(Long id);
     Long updateEmployee(EmployeeDTO employeeDTO) throws Exception;
     List<EmployeeDTO> listEmployees();
-    EmployeeDTO searchAnEmployee(String name);
+    EmployeeDTO searchAnEmployee(String name) throws Exception;
+    EmployeeDTO searchAnEmployeeById(Long id);
 
 }

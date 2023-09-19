@@ -2,6 +2,7 @@ package br.com.devstoblu.scheduEase.controllers;
 
 
 import br.com.devstoblu.scheduEase.models.dtos.EmployeeDTO;
+import br.com.devstoblu.scheduEase.models.dtos.EmployeeNameDTO;
 import br.com.devstoblu.scheduEase.services.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
-import java.util.Objects;
+
 
 @RestController
 @RequestMapping(value = "/api/employees")
@@ -37,7 +38,7 @@ public class EmployeeController {
     @PutMapping
     public ResponseEntity<Object> updateEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
         //Verificando se o Employee existe
-        EmployeeDTO existingEmployeee = employeeService.searchAnEmployee(employeeDTO.getName());
+        EmployeeDTO existingEmployeee = employeeService.searchAnEmployeeById(employeeDTO.getId());
 
         if (existingEmployeee == null) {
             return ResponseEntity.notFound().build();
@@ -60,9 +61,13 @@ public class EmployeeController {
         return employeeService.listEmployees();
     }
 
-    @GetMapping("/{name}")
-    public EmployeeDTO searchAnEmployee(@PathVariable String name) {
+    @GetMapping
+    public EmployeeDTO searchAnEmployee(@Valid @RequestBody EmployeeNameDTO employeeNameDTO) {
 
-        return employeeService.searchAnEmployee(name);
+        try {
+            return employeeService.searchAnEmployee(employeeNameDTO.getName());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -18,8 +18,6 @@ public class EmployeeDTO implements Serializable {
     @NotEmpty(message = "O campo nome não pode estar vazio.")
     private String name;
 
-    @NotBlank(message = "O campo função não pode estar em branco.")
-    @NotEmpty(message = "O campo função não pode estar vazio.")
     private EmployeeRole role;
 
     private List<ScheduleDTO> scheduleListDTO;

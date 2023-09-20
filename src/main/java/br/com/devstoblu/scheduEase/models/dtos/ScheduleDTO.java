@@ -16,35 +16,35 @@ public class ScheduleDTO implements Serializable {
     private static final long serialVersionUID = 42L;
     private Long id;
 
-    @NotNull(message = "O horário precisa esta vinculado a um profissional.")
-    private Employee employeeId;
-
     @NotBlank(message = "O campo nome do Cliente não pode estar em branco.")
     @NotEmpty(message = "O campo nome do Cliente não pode estar vazio.")
     private String clientName;
+
+    @NotNull
+    private Long employeeId;
 
     @NotBlank(message = "O campo Serviço Agendado não pode estar em branco.")
     @NotEmpty(message = "O campo Serviço Agendado não pode estar vazio.")
     private String serviceBooked;
 
     @NotNull(message = "Selecione uma data para fazer o agendamento.")
-    private Date appointmentDate;
+    private String appointmentDate;
 
-    @NotNull(message = "O campo Horário Início não pode estar vazio.")
+    @NotNull(message = "Selecione uma Horário de Início para fazer o agendamento.")
     private TimeGrid startTime;
 
-    @NotNull(message = "O campo Horário Fim não pode estar vazio.")
+    @NotNull(message = "Selecione uma Horário de Fim para fazer o agendamento.")
     private TimeGrid endTime;
 
     public ScheduleDTO() {
 
     }
 
-    public ScheduleDTO(Long id, Employee employeeId, String clientName, String serviceBooked
-            , Date appointmentDate, TimeGrid startTime, TimeGrid endTime) {
+    public ScheduleDTO(Long id, String clientName, Long employeeId, String serviceBooked
+            , String appointmentDate, TimeGrid startTime, TimeGrid endTime) {
         this.id = id;
-        this.employeeId = employeeId;
         this.clientName = clientName;
+        this.employeeId = employeeId;
         this.serviceBooked = serviceBooked;
         this.appointmentDate = appointmentDate;
         this.startTime = startTime;
@@ -57,14 +57,6 @@ public class ScheduleDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Employee getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Employee employeeId) {
-        this.employeeId = employeeId;
     }
 
     public String getClientName() {
@@ -83,11 +75,11 @@ public class ScheduleDTO implements Serializable {
         this.serviceBooked = serviceBooked;
     }
 
-    public Date getAppointmentDate() {
+    public String getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(Date appointmentDate) {
+    public void setAppointmentDate(String appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 
@@ -107,11 +99,18 @@ public class ScheduleDTO implements Serializable {
         this.endTime = endTime;
     }
 
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
+    }
+
     @Override
     public String toString() {
         return "ScheduleDTO{" +
                 "id=" + id +
-                ", Profissional=" + employeeId.getName() +
                 ", clientName='" + clientName + '\'' +
                 ", serviceBooked='" + serviceBooked + '\'' +
                 ", appointmentDate=" + appointmentDate +

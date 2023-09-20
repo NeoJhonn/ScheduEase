@@ -16,7 +16,7 @@ public class Employee {
     private String name;
     @Enumerated(value = EnumType.STRING)
     private EmployeeRole role;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private List<Schedule> scheduleList;
     @Column(nullable = false)
     private Boolean isActive;

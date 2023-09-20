@@ -1,14 +1,14 @@
 package br.com.devstoblu.scheduEase.controllers;
 
+import br.com.devstoblu.scheduEase.models.dtos.ScheduleClientNameEmployeeIdDTO;
 import br.com.devstoblu.scheduEase.models.dtos.ScheduleDTO;
 import br.com.devstoblu.scheduEase.models.dtos.ScheduleDateIdDTO;
 import br.com.devstoblu.scheduEase.services.ScheduleService;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,18 +19,39 @@ public class ScheduleController {
     @Autowired
     ScheduleService scheduleService;
 
-    public Long createAnAppointment(ScheduleDTO scheduleDTO) throws Exception {
-        return null;
+    @PostMapping
+    public ResponseEntity<Object> createAnAppointment(@Valid @RequestBody ScheduleDTO scheduleDTO) throws Exception {
+
+        try {
+            return ResponseEntity.ok(scheduleService.createAnAppointment(scheduleDTO));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
+    @PutMapping
+    public ResponseEntity<Object> updateAnAppointment(@Valid @RequestBody ScheduleDTO scheduleDTO) throws Exception {
+        //Verificando se o horário existe
+        ScheduleDTO existingSchedule = scheduleService.searchAnAppointment(scheduleDTO.getClientName(), scheduleDTO.getId());
 
-    public Long updateAnAppointment(ScheduleDTO schedule) throws Exception {
-        return null;
+        if (existingSchedule == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        try {
+            // Copie os atributos de scheduleDTO para o existingSchedule usando o BeanUtils
+            BeanUtils.copyProperties(scheduleDTO, existingSchedule);
+            // Salve a atualização no banco de dados
+            return ResponseEntity.ok(scheduleService.updateAnAppointment(existingSchedule));
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
-
-    public void deleteAnAppointment(Long id) {
-
+    @DeleteMapping(value = "/{id}")
+    public void deleteAnAppointment(@PathVariable Long id) {
+        scheduleService.deleteAnAppointment(id);
     }
 
     @GetMapping("/list-appointments")
@@ -38,8 +59,13 @@ public class ScheduleController {
         return scheduleService.listAppointments(dateIdDTO.getAppointmentDate(), dateIdDTO.getId());
     }
 
+    @GetMapping
+    public ScheduleDTO searchAnAppointment(@Valid @RequestBody ScheduleClientNameEmployeeIdDTO employee) throws Exception {
 
-    public ScheduleDTO searchAnAppointment(String clientName, Long employeeId) throws Exception {
-        return null;
+        try {
+            return scheduleService.searchAnAppointment(employee.getClientName(), employee.getEmployeeId());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

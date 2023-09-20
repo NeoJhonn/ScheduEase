@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface IScheduleService {
 
-    void createAnAppointment(ScheduleDTO scheduleDTO);
+    Long createAnAppointment(ScheduleDTO scheduleDTO) throws Exception;
     List<ScheduleDTO> listAppointments(Date appointmentDate, Long employeeId);
     void deleteAnAppointment(Long id);
-    void updateAnAppointment(ScheduleDTO schedule);
-    ScheduleDTO searchAnAppointment(String clientName, Long employeeId);
+    Long updateAnAppointment(ScheduleDTO schedule) throws Exception;
+    ScheduleDTO searchAnAppointment(String clientName, Long employeeId) throws Exception;
 }

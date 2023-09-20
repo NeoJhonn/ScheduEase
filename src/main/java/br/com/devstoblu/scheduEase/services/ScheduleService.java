@@ -9,7 +9,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 import static br.com.devstoblu.scheduEase.consts.ExceptionConsts.SCHEDULE_INSERT_ERROR;
@@ -39,7 +38,7 @@ public class ScheduleService implements IScheduleService {
     }
 
     @Override
-    public List<ScheduleDTO> listAppointments(Date appointmentDate, Long employeeId) {
+    public List<ScheduleDTO> listAppointments(String appointmentDate, Long employeeId) {
         List<ScheduleDTO> schedules = repository.listAppointments(appointmentDate, employeeId).stream().map(s -> mapper
                 .map(s, ScheduleDTO.class)).toList();
 

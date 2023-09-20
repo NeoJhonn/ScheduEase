@@ -3,6 +3,7 @@ package br.com.devstoblu.scheduEase.models.dtos;
 import br.com.devstoblu.scheduEase.enums.EmployeeRole;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public class EmployeeDTO implements Serializable {
     @NotEmpty(message = "O campo nome não pode estar vazio.")
     private String name;
 
+    @NotNull(message = "Selecione um cargo.")
     private EmployeeRole role;
 
     private List<ScheduleDTO> scheduleListDTO;

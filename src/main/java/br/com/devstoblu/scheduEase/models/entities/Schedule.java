@@ -2,7 +2,6 @@ package br.com.devstoblu.scheduEase.models.entities;
 
 import br.com.devstoblu.scheduEase.enums.TimeGrid;
 import jakarta.persistence.*;
-import org.hibernate.annotations.CollectionId;
 
 import java.util.Date;
 

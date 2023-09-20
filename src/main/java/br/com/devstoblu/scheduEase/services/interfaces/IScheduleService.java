@@ -8,8 +8,8 @@ import java.util.List;
 public interface IScheduleService {
 
     Long createAnAppointment(ScheduleDTO scheduleDTO) throws Exception;
-    List<ScheduleDTO> listAppointments(Date appointmentDate, Long employeeId);
-    void deleteAnAppointment(Long id);
     Long updateAnAppointment(ScheduleDTO schedule) throws Exception;
+    void deleteAnAppointment(Long id);
+    List<ScheduleDTO> listAppointments(String appointmentDate, Long employeeId);
     ScheduleDTO searchAnAppointment(String clientName, Long employeeId) throws Exception;
 }

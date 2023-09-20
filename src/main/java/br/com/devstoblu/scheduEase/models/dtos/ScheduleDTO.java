@@ -30,12 +30,10 @@ public class ScheduleDTO implements Serializable {
     @NotNull(message = "Selecione uma data para fazer o agendamento.")
     private Date appointmentDate;
 
-    @NotBlank(message = "O campo Horário Início não pode estar em branco.")
-    @NotEmpty(message = "O campo Horário Início não pode estar vazio.")
+    @NotNull(message = "O campo Horário Início não pode estar vazio.")
     private TimeGrid startTime;
 
-    @NotBlank(message = "O campo Horário Fim não pode estar em branco.")
-    @NotEmpty(message = "O campo Horário Fim não pode estar vazio.")
+    @NotNull(message = "O campo Horário Fim não pode estar vazio.")
     private TimeGrid endTime;
 
     public ScheduleDTO() {

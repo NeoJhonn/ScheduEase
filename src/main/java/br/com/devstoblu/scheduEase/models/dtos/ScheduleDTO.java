@@ -2,6 +2,8 @@ package br.com.devstoblu.scheduEase.models.dtos;
 
 import br.com.devstoblu.scheduEase.models.entities.Employee;
 import br.com.devstoblu.scheduEase.enums.TimeGrid;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

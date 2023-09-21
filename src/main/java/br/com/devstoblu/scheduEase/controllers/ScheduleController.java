@@ -20,7 +20,7 @@ public class ScheduleController {
     ScheduleService scheduleService;
 
     @PostMapping
-    public ResponseEntity<Object> createAnAppointment(@Valid @RequestBody ScheduleDTO scheduleDTO) throws Exception {
+    public ResponseEntity<Object> createAnAppointment( @RequestBody ScheduleDTO scheduleDTO) throws Exception {
 
         try {
             return ResponseEntity.ok(scheduleService.createAnAppointment(scheduleDTO));

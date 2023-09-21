@@ -22,19 +22,16 @@ public class EmployeeDTO implements Serializable {
     @NotNull(message = "Selecione um cargo.")
     private EmployeeRole role;
 
-    private List<ScheduleDTO> scheduleListDTO;
-
     private Boolean isActive = true;
 
     public EmployeeDTO() {
 
     }
 
-    public EmployeeDTO(Long id, String name, EmployeeRole role, List<ScheduleDTO> scheduleListDTO, Boolean isActive) {
+    public EmployeeDTO(Long id, String name, EmployeeRole role, Boolean isActive) {
         this.id = id;
         this.name = name;
         this.role = role;
-        this.scheduleListDTO = scheduleListDTO;
         this.isActive = isActive;
     }
 
@@ -62,14 +59,6 @@ public class EmployeeDTO implements Serializable {
         this.role = role;
     }
 
-    public List<ScheduleDTO> getScheduleListDTO() {
-        return scheduleListDTO;
-    }
-
-    public void setScheduleList(List<ScheduleDTO> scheduleListDTO) {
-        this.scheduleListDTO = scheduleListDTO;
-    }
-
     public Boolean getActive() {
         return isActive;
     }
@@ -84,7 +73,6 @@ public class EmployeeDTO implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", role=" + role +
-                ", scheduleList=" + scheduleListDTO +
                 ", isActive=" + isActive +
                 '}';
     }

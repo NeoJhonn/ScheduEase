@@ -5,6 +5,7 @@ import br.com.devstoblu.scheduEase.models.dtos.ScheduleDTO;
 import br.com.devstoblu.scheduEase.models.entities.Schedule;
 import br.com.devstoblu.scheduEase.repositories.ScheduleRepository;
 import br.com.devstoblu.scheduEase.services.interfaces.IScheduleService;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,18 +24,7 @@ public class ScheduleService implements IScheduleService {
 
     @Override
     public Long createAnAppointment(ScheduleDTO scheduleDTO) throws Exception {
-
-        // Verificando se o horário esta disponível
-        ScheduleDTO existingSchedule = verifyHasSameAppointment(scheduleDTO);
-
-        try {
-            if (existingSchedule != null) {
-                throw new Exception(SCHEDULE_HAS_SAME_ERROR);
-            }
             return save(scheduleDTO);
-        } catch (Exception e) {
-            throw new Exception(SCHEDULE_HAS_SAME_ERROR);
-        }
     }
 
     @Override
@@ -83,11 +73,5 @@ public class ScheduleService implements IScheduleService {
         return mapper.map(repository.findById(id), ScheduleDTO.class);
     }
 
-    public  ScheduleDTO verifyHasSameAppointment(ScheduleDTO scheduleDTO) {
-        return mapper.map(repository.verifyHasSameAppointment(scheduleDTO.getStartTime(),
-                                                   scheduleDTO.getEndTime(),
-                                                   scheduleDTO.getAppointmentDate(),
-                                                   scheduleDTO.getEmployeeId()),
-                                                   ScheduleDTO.class);
-    }
+
 }

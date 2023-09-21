@@ -1,11 +1,11 @@
 package br.com.devstoblu.scheduEase.repositories;
 
 import br.com.devstoblu.scheduEase.enums.TimeGrid;
+import br.com.devstoblu.scheduEase.models.dtos.ScheduleDTO;
 import br.com.devstoblu.scheduEase.models.entities.Schedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.Date;
 import java.util.List;
 
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {

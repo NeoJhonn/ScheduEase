@@ -8,7 +8,7 @@ public class ExceptionConsts {
 
     public static final String SCHEDULE_INSERT_ERROR = "Erro ao inserir um Horário.";
     public static final String SCHEDULE_SEARCHED_ERROR = "Erro, horário não encontrado.";
-    public static final String SCHEDULE_HAS_SAME_ERROR = "Erro, já um cliente agendado nesse horário.";
+    public static final String SCHEDULE_HAS_SAME_ERROR = "Erro, já há um cliente agendado nesse horário.";
 
 
 }

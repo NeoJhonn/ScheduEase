@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static br.com.devstoblu.scheduEase.consts.ExceptionConsts.SCHEDULE_INSERT_ERROR;
-import static br.com.devstoblu.scheduEase.consts.ExceptionConsts.SCHEDULE_SEARCHED_ERROR;
+import static br.com.devstoblu.scheduEase.consts.ExceptionConsts.*;
 
 @Service
 public class ScheduleService implements IScheduleService {
@@ -24,7 +23,18 @@ public class ScheduleService implements IScheduleService {
 
     @Override
     public Long createAnAppointment(ScheduleDTO scheduleDTO) throws Exception {
-        return save(scheduleDTO);
+
+        // Verificando se o horário esta disponível
+        ScheduleDTO existingSchedule = verifyHasSameAppointment(scheduleDTO);
+
+        try {
+            if (existingSchedule != null) {
+                throw new Exception(SCHEDULE_HAS_SAME_ERROR);
+            }
+            return save(scheduleDTO);
+        } catch (Exception e) {
+            throw new Exception(SCHEDULE_HAS_SAME_ERROR);
+        }
     }
 
     @Override
@@ -67,5 +77,17 @@ public class ScheduleService implements IScheduleService {
         } catch (Exception e) {
             throw new Exception(SCHEDULE_INSERT_ERROR);
         }
+    }
+
+    public ScheduleDTO findAnAppointmentById(Long id) {
+        return mapper.map(repository.findById(id), ScheduleDTO.class);
+    }
+
+    public  ScheduleDTO verifyHasSameAppointment(ScheduleDTO scheduleDTO) {
+        return mapper.map(repository.verifyHasSameAppointment(scheduleDTO.getStartTime(),
+                                                   scheduleDTO.getEndTime(),
+                                                   scheduleDTO.getAppointmentDate(),
+                                                   scheduleDTO.getEmployeeId()),
+                                                   ScheduleDTO.class);
     }
 }

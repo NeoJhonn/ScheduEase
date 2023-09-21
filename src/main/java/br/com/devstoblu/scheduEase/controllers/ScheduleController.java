@@ -32,7 +32,7 @@ public class ScheduleController {
     @PutMapping
     public ResponseEntity<Object> updateAnAppointment(@Valid @RequestBody ScheduleDTO scheduleDTO) throws Exception {
         //Verificando se o horário existe
-        ScheduleDTO existingSchedule = scheduleService.searchAnAppointment(scheduleDTO.getClientName(), scheduleDTO.getId());
+        ScheduleDTO existingSchedule = scheduleService.findAnAppointmentById(scheduleDTO.getId());
 
         if (existingSchedule == null) {
             return ResponseEntity.notFound().build();

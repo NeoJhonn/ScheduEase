@@ -1,6 +1,7 @@
 package br.com.devstoblu.scheduEase.services;
 
 
+import br.com.devstoblu.scheduEase.enums.TimeGrid;
 import br.com.devstoblu.scheduEase.models.dtos.ScheduleDTO;
 import br.com.devstoblu.scheduEase.models.entities.Schedule;
 import br.com.devstoblu.scheduEase.repositories.ScheduleRepository;
@@ -24,7 +25,20 @@ public class ScheduleService implements IScheduleService {
 
     @Override
     public Long createAnAppointment(ScheduleDTO scheduleDTO) throws Exception {
+        // Verificando se já existe um cliente agendado neste horário
+        Schedule existingSchedule = repository.verifyHasSameAppointment(scheduleDTO.getStartTime().toString(), scheduleDTO.getEndTime().toString(), scheduleDTO.getAppointmentDate(), scheduleDTO.getEmployeeId());
+
+        try{
+            if (existingSchedule != null) {
+                throw new Exception(SCHEDULE_HAS_SAME_ERROR);
+            }
+
             return save(scheduleDTO);
+        } catch (Exception e) {
+            throw new Exception(SCHEDULE_HAS_SAME_ERROR);
+        }
+
+
     }
 
     @Override

@@ -33,5 +33,5 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
              AND s.appointment_date = :appointmentDate 
              AND s.employee_id = :employeeId
             """)
-    Schedule verifyHasSameAppointment(TimeGrid startTime, TimeGrid endTime, String appointmentDate, Long employeeId);
+    Schedule verifyHasSameAppointment(String startTime, String endTime, String appointmentDate, Long employeeId);
 }

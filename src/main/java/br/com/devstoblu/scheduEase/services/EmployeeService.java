@@ -22,7 +22,18 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public Long addEmployee(EmployeeDTO employeeDTO) throws Exception {
-        return  save(employeeDTO);
+
+        try {
+            // verificar se já existe um profissional com o mesmo nome cadastrado
+            if (repository.findByName(employeeDTO.getName()) != null) {
+                throw new Exception(EMPLOYEE_INSERT_NAME_ERROR);
+            }
+
+            return  save(employeeDTO);
+        } catch (Exception e) {
+            throw new Exception(EMPLOYEE_INSERT_NAME_ERROR);
+        }
+
     }
 
     @Override
@@ -66,22 +77,13 @@ public class EmployeeService implements IEmployeeService {
         Boolean hasSameName = false;
 
         try {
-            // verificar se já existe um profissional com o mesmo nome cadastrado
-            if (repository.findByName(employeeDTO.getName()) != null) {
-                hasSameName = true;
-                throw new Exception(EMPLOYEE_INSERT_NAME_ERROR);
-            }
 
             Employee employee = mapper.map(employeeDTO, Employee.class);
             Employee created = repository.save(employee);
             return created.getId();
 
         } catch (Exception e) {
-            if (hasSameName) {
-                throw new Exception(EMPLOYEE_INSERT_NAME_ERROR);
-            } else {
-                throw new Exception(EMPLOYEE_INSERT_ERROR);
-            }
+            throw new Exception(EMPLOYEE_INSERT_ERROR);
         }
     }
 }

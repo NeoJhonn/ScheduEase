@@ -5,7 +5,6 @@ import br.com.devstoblu.scheduEase.enums.EmployeeRole;
 import br.com.devstoblu.scheduEase.models.dtos.EmployeeDTO;
 import br.com.devstoblu.scheduEase.models.entities.Employee;
 import br.com.devstoblu.scheduEase.repositories.EmployeeRepository;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -14,7 +13,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -143,22 +141,19 @@ public class EmployeeServiceTest {
         assertNotNull(id);
     }
 
-    public void save(EmployeeDTO employeeDTO) throws Exception {
+    @Test
+    public void save_shouldSave() throws Exception {
         // Arrange
-        // Act
-        // Assert
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        Employee employee = new Employee();
+        employee.setId(1l);
+        when(mapper.map(employeeDTO, Employee.class)).thenReturn(employee);
+        when(repository.save(employee)).thenReturn(employee);
 
-//        Boolean hasSameName = false;
-//
-//        try {
-//
-//
-//            Employee employee = mapper.map(employeeDTO, Employee.class);
-//            Employee created = repository.save(employee);
-//            return created.getId();
-//
-//        } catch (Exception e) {
-//            throw new Exception(EMPLOYEE_INSERT_ERROR);
-//        }
+        // Act
+        Long id = employeeService.save(employeeDTO);
+
+        // Assert
+        assertNotNull(id);
     }
 }

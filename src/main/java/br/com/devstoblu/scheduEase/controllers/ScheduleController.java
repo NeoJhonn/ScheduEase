@@ -55,7 +55,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/list-appointments")
-    public List<ScheduleDTO> listAppointments(@Valid @RequestBody ScheduleDateIdDTO dateIdDTO) {
+    public List<ScheduleDTO> listAppointments( @RequestBody ScheduleDateIdDTO dateIdDTO) {
         return scheduleService.listAppointments(dateIdDTO.getAppointmentDate(), dateIdDTO.getId());
     }
 

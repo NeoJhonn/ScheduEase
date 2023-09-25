@@ -1,0 +1,462 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/schedules": {
+      "get": {
+        "tags": [
+          "schedule-controller"
+        ],
+        "operationId": "searchAnAppointment",
+        "parameters": [
+          {
+            "name": "employee",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ScheduleClientNameEmployeeIdDTO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "schedule-controller"
+        ],
+        "operationId": "updateAnAppointment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "schedule-controller"
+        ],
+        "operationId": "createAnAppointment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/employees": {
+      "get": {
+        "tags": [
+          "employee-controller"
+        ],
+        "operationId": "searchAnEmployee",
+        "parameters": [
+          {
+            "name": "employeeNameDTO",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/EmployeeNameDTO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "employee-controller"
+        ],
+        "operationId": "updateEmployee",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "employee-controller"
+        ],
+        "operationId": "addEmployee",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/schedules/list-appointments": {
+      "get": {
+        "tags": [
+          "schedule-controller"
+        ],
+        "operationId": "listAppointments",
+        "parameters": [
+          {
+            "name": "dateIdDTO",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ScheduleDateIdDTO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ScheduleDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/employees/list-all": {
+      "get": {
+        "tags": [
+          "employee-controller"
+        ],
+        "operationId": "listEmployees",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmployeeDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/schedules/{id}": {
+      "delete": {
+        "tags": [
+          "schedule-controller"
+        ],
+        "operationId": "deleteAnAppointment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/employees/{id}": {
+      "delete": {
+        "tags": [
+          "employee-controller"
+        ],
+        "operationId": "deleteEmployee",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ScheduleDTO": {
+        "required": [
+          "appointmentDate",
+          "clientName",
+          "employeeId",
+          "endTime",
+          "serviceBooked",
+          "startTime"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "clientName": {
+            "type": "string"
+          },
+          "employeeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "serviceBooked": {
+            "type": "string"
+          },
+          "appointmentDate": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "enum": [
+              "H_8_00",
+              "H_8_30",
+              "H_9_00",
+              "H_9_30",
+              "H_10_00",
+              "H_10_30",
+              "H_11_00",
+              "H_11_30",
+              "H_12_00",
+              "H_12_30",
+              "H_13_00",
+              "H_13_30",
+              "H_14_00",
+              "H_14_30",
+              "H_15_00",
+              "H_15_30",
+              "H_16_00",
+              "H_16_30",
+              "H_17_00",
+              "H_17_30",
+              "H_18_00",
+              "H_18_30",
+              "H_19_00",
+              "H_19_30",
+              "H_20_00",
+              "H_20_30",
+              "H_21_00",
+              "H_21_30",
+              "H_22_00"
+            ]
+          },
+          "endTime": {
+            "type": "string",
+            "enum": [
+              "H_8_00",
+              "H_8_30",
+              "H_9_00",
+              "H_9_30",
+              "H_10_00",
+              "H_10_30",
+              "H_11_00",
+              "H_11_30",
+              "H_12_00",
+              "H_12_30",
+              "H_13_00",
+              "H_13_30",
+              "H_14_00",
+              "H_14_30",
+              "H_15_00",
+              "H_15_30",
+              "H_16_00",
+              "H_16_30",
+              "H_17_00",
+              "H_17_30",
+              "H_18_00",
+              "H_18_30",
+              "H_19_00",
+              "H_19_30",
+              "H_20_00",
+              "H_20_30",
+              "H_21_00",
+              "H_21_30",
+              "H_22_00"
+            ]
+          }
+        }
+      },
+      "EmployeeDTO": {
+        "required": [
+          "name",
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "HairStylist",
+              "Manicure"
+            ]
+          },
+          "active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ScheduleClientNameEmployeeIdDTO": {
+        "required": [
+          "clientName",
+          "employeeId"
+        ],
+        "type": "object",
+        "properties": {
+          "clientName": {
+            "type": "string"
+          },
+          "employeeId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ScheduleDateIdDTO": {
+        "required": [
+          "appointmentDate",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "appointmentDate": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "EmployeeNameDTO": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

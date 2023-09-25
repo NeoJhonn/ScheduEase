@@ -20,7 +20,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     /* Listar horários pela Data e profissional */
     @Query(nativeQuery = true, value = """
              SELECT * FROM tb_schedule s
-             WHERE s.appointment_date = :appointmentDate AND s.employee_id = :employeeId
+             WHERE s.appointment_date = CAST(:appointmentDate AS timestamp) AND s.employee_id = :employeeId
              ORDER BY s.appointment_date DESC
             """)
     List<Schedule> listAppointments(String appointmentDate, Long employeeId);
@@ -30,7 +30,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
              SELECT * FROM tb_schedule s
              WHERE s.start_time = :startTime 
              AND s.end_time = :endTime 
-             AND s.appointment_date = :appointmentDate 
+             AND s.appointment_date = CAST(:appointmentDate AS timestamp)
              AND s.employee_id = :employeeId
             """)
     Schedule verifyHasSameAppointment(String startTime, String endTime, String appointmentDate, Long employeeId);

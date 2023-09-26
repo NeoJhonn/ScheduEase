@@ -5,6 +5,7 @@ import br.com.devstoblu.scheduEase.enums.EmployeeRole;
 import br.com.devstoblu.scheduEase.models.dtos.EmployeeDTO;
 import br.com.devstoblu.scheduEase.models.entities.Employee;
 import br.com.devstoblu.scheduEase.repositories.EmployeeRepository;
+import br.com.devstoblu.scheduEase.repositories.ScheduleRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -79,17 +81,15 @@ public class EmployeeServiceTest {
     @Test
     public void deleteEmployee_shouldDeleteEmployee() {
         // Arrange
-        Employee employee = new Employee();
-        employee.setName("Mylena");
-        employee.setActive(true);
-        employee.setId(1l);
-        employee.setRole(EmployeeRole.Manicure);
+        Long id = 1l;
+        repository = mock(EmployeeRepository.class);
+        employeeService.repository = repository;
 
         // Act
-        employeeService.deleteEmployee(employee.getId());
+        employeeService.deleteEmployee(id);
 
         // Assert
-        assertNull(employeeService.searchAnEmployeeById(employee.getId()));
+        assertNull(employeeService.searchAnEmployeeById(id));
     }
 
     @Test

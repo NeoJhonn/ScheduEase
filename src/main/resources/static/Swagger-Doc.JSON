@@ -30,11 +30,20 @@
         "operationId": "searchAnAppointment",
         "parameters": [
           {
-            "name": "employee",
+            "name": "clientName",
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/ScheduleClientNameEmployeeIdDTO"
+              "type": "string"
+            }
+          },
+          {
+            "name": "employeeId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
             }
           }
         ],
@@ -119,11 +128,11 @@
         "operationId": "searchAnEmployee",
         "parameters": [
           {
-            "name": "employeeNameDTO",
+            "name": "employeeName",
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/EmployeeNameDTO"
+              "type": "string"
             }
           }
         ],
@@ -208,11 +217,20 @@
         "operationId": "listAppointments",
         "parameters": [
           {
-            "name": "dateIdDTO",
+            "name": "appointmentDate",
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/ScheduleDateIdDTO"
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
             }
           }
         ],
@@ -431,49 +449,6 @@
           },
           "active": {
             "type": "boolean"
-          }
-        }
-      },
-      "ScheduleClientNameEmployeeIdDTO": {
-        "required": [
-          "clientName",
-          "employeeId"
-        ],
-        "type": "object",
-        "properties": {
-          "clientName": {
-            "type": "string"
-          },
-          "employeeId": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "ScheduleDateIdDTO": {
-        "required": [
-          "appointmentDate",
-          "id"
-        ],
-        "type": "object",
-        "properties": {
-          "appointmentDate": {
-            "type": "string"
-          },
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "EmployeeNameDTO": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
           }
         }
       }

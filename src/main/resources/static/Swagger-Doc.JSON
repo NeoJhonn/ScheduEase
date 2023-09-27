@@ -10,12 +10,23 @@
       "description": "Generated server url"
     }
   ],
+  "tags": [
+    {
+      "name": "Agenda",
+      "description": "Endpoints relacionados a Agenda"
+    },
+    {
+      "name": "Funcionário",
+      "description": "Endpoints relacionados ao Funcionário"
+    }
+  ],
   "paths": {
     "/api/schedules": {
       "get": {
         "tags": [
-          "schedule-controller"
+          "Agenda"
         ],
+        "description": "Pesquisa um horário pelo nome do Cliente e id do Funcionário",
         "operationId": "searchAnAppointment",
         "parameters": [
           {
@@ -42,8 +53,9 @@
       },
       "put": {
         "tags": [
-          "schedule-controller"
+          "Agenda"
         ],
+        "description": "Atualiza um horário",
         "operationId": "updateAnAppointment",
         "requestBody": {
           "content": {
@@ -70,8 +82,9 @@
       },
       "post": {
         "tags": [
-          "schedule-controller"
+          "Agenda"
         ],
+        "description": "Adiciona uma horário",
         "operationId": "createAnAppointment",
         "requestBody": {
           "content": {
@@ -100,8 +113,9 @@
     "/api/employees": {
       "get": {
         "tags": [
-          "employee-controller"
+          "Funcionário"
         ],
+        "description": "Pesquisa um funcionário pelo nome",
         "operationId": "searchAnEmployee",
         "parameters": [
           {
@@ -128,8 +142,9 @@
       },
       "put": {
         "tags": [
-          "employee-controller"
+          "Funcionário"
         ],
+        "description": "Atualiza um cadastro de um Funcionário",
         "operationId": "updateEmployee",
         "requestBody": {
           "content": {
@@ -156,8 +171,9 @@
       },
       "post": {
         "tags": [
-          "employee-controller"
+          "Funcionário"
         ],
+        "description": "Cadastra um Funcionário",
         "operationId": "addEmployee",
         "requestBody": {
           "content": {
@@ -186,8 +202,9 @@
     "/api/schedules/list-appointments": {
       "get": {
         "tags": [
-          "schedule-controller"
+          "Agenda"
         ],
+        "description": "Lista todos os horários do Funcionário pela data e seu Id",
         "operationId": "listAppointments",
         "parameters": [
           {
@@ -219,8 +236,9 @@
     "/api/employees/list-all": {
       "get": {
         "tags": [
-          "employee-controller"
+          "Funcionário"
         ],
+        "description": "Lista todos os Funcionários cadastrados",
         "operationId": "listEmployees",
         "responses": {
           "200": {
@@ -242,8 +260,9 @@
     "/api/schedules/{id}": {
       "delete": {
         "tags": [
-          "schedule-controller"
+          "Agenda"
         ],
+        "description": "Exclui um horário",
         "operationId": "deleteAnAppointment",
         "parameters": [
           {
@@ -266,8 +285,9 @@
     "/api/employees/{id}": {
       "delete": {
         "tags": [
-          "employee-controller"
+          "Funcionário"
         ],
+        "description": "Exclui um Funcionário",
         "operationId": "deleteEmployee",
         "parameters": [
           {

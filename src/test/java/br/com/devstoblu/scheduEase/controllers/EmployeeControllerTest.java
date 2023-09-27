@@ -2,7 +2,6 @@ package br.com.devstoblu.scheduEase.controllers;
 
 import br.com.devstoblu.scheduEase.enums.EmployeeRole;
 import br.com.devstoblu.scheduEase.models.dtos.EmployeeDTO;
-import br.com.devstoblu.scheduEase.models.dtos.EmployeeNameDTO;
 import br.com.devstoblu.scheduEase.models.entities.Employee;
 import br.com.devstoblu.scheduEase.repositories.EmployeeRepository;
 import br.com.devstoblu.scheduEase.services.EmployeeService;
@@ -97,15 +96,15 @@ public class EmployeeControllerTest {
     @Test
     public void searchAnEmployee_shouldSearchAnEmployee() throws Exception {
         // Arrange
-        EmployeeNameDTO employeeNameDTO = new EmployeeNameDTO("Jhonny Azevedo");
+        String employeeName = "Jhonny Azevedo";
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setName(employeeNameDTO.getName());
-        when(employeeService.searchAnEmployee(employeeNameDTO.getName())).thenReturn(employeeDTO);
+        employeeDTO.setName(employeeName);
+        when(employeeService.searchAnEmployee(employeeName)).thenReturn(employeeDTO);
 
         // Act
-        EmployeeDTO employeeSearched = employeeController.searchAnEmployee(employeeNameDTO);
+        EmployeeDTO employeeSearched = employeeController.searchAnEmployee(employeeName);
 
         // Assert
-        assertEquals(employeeNameDTO.getName(), employeeSearched.getName());
+        assertEquals(employeeName, employeeSearched.getName());
     }
 }

@@ -2,8 +2,10 @@ package br.com.devstoblu.scheduEase.controllers;
 
 
 import br.com.devstoblu.scheduEase.models.dtos.EmployeeDTO;
-import br.com.devstoblu.scheduEase.models.dtos.EmployeeNameDTO;
 import br.com.devstoblu.scheduEase.services.EmployeeService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +14,7 @@ import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 
-
+@Tag(name = "Funcionário", description = "Endpoints relacionados ao Funcionário") // customizando UI do Swagger
 @RestController
 @RequestMapping(value = "/api/employees")
 public class EmployeeController {
@@ -20,6 +22,7 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Operation(description = "Cadastra um Funcionário", method = "POST")// customizando UI do Swagger
     @PostMapping
     public ResponseEntity<Object> addEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
 
@@ -30,11 +33,13 @@ public class EmployeeController {
         }
     }
 
+    @Operation(description = "Exclui um Funcionário", method = "DELETE")// customizando UI do Swagger
     @DeleteMapping(value = "/{id}")
     public void deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);
     }
 
+    @Operation(description = "Atualiza um cadastro de um Funcionário", method = "PUT")// customizando UI do Swagger
     @PutMapping
     public ResponseEntity<Object> updateEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
         //Verificando se o Employee existe
@@ -55,16 +60,18 @@ public class EmployeeController {
         }
     }
 
+    @Operation(description = "Lista todos os Funcionários cadastrados", method = "GET")// customizando UI do Swagger
     @GetMapping("/list-all")
     public List<EmployeeDTO> listEmployees() {
         return employeeService.listEmployees();
     }
 
+    @Operation(description = "Pesquisa um funcionário pelo nome", method = "GET")// customizando UI do Swagger
     @GetMapping
-    public EmployeeDTO searchAnEmployee(@Valid @RequestBody EmployeeNameDTO employeeNameDTO) {
+    public EmployeeDTO searchAnEmployee(@RequestParam(name = "employeeName") String employeeName) {
 
         try {
-            return employeeService.searchAnEmployee(employeeNameDTO.getName());
+            return employeeService.searchAnEmployee(employeeName);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

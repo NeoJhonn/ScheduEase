@@ -5,7 +5,6 @@ import br.com.devstoblu.scheduEase.enums.EmployeeRole;
 import br.com.devstoblu.scheduEase.models.dtos.EmployeeDTO;
 import br.com.devstoblu.scheduEase.models.entities.Employee;
 import br.com.devstoblu.scheduEase.repositories.EmployeeRepository;
-import br.com.devstoblu.scheduEase.repositories.ScheduleRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

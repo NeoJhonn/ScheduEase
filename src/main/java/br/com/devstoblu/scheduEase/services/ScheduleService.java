@@ -1,7 +1,6 @@
 package br.com.devstoblu.scheduEase.services;
 
 
-import br.com.devstoblu.scheduEase.enums.TimeGrid;
 import br.com.devstoblu.scheduEase.models.dtos.ScheduleDTO;
 import br.com.devstoblu.scheduEase.models.entities.Schedule;
 import br.com.devstoblu.scheduEase.repositories.ScheduleRepository;

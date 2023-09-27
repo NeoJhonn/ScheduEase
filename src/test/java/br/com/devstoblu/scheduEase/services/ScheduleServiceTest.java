@@ -66,7 +66,7 @@ public class ScheduleServiceTest {
     }
 
     @Test
-    public void deleteAnAppointment_shouldDeleteAnAppointment() {
+    public void deleteAnAppointment_shouldDeleteAnAppointment() throws Exception {
         // Arrange
         Long id = 1l;
         repository = mock(ScheduleRepository.class);

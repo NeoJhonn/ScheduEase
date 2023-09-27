@@ -9,7 +9,7 @@ public interface IScheduleService {
 
     Long createAnAppointment(ScheduleDTO scheduleDTO) throws Exception;
     Long updateAnAppointment(ScheduleDTO schedule) throws Exception;
-    void deleteAnAppointment(Long id);
+    void deleteAnAppointment(Long id) throws Exception;
     List<ScheduleDTO> listAppointments(String appointmentDate, Long employeeId);
     ScheduleDTO searchAnAppointment(String clientName, Long employeeId) throws Exception;
 }

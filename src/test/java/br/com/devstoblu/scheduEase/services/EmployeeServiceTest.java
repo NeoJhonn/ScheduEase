@@ -14,13 +14,14 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EmployeeServiceTest {
@@ -82,14 +83,21 @@ public class EmployeeServiceTest {
     public void deleteEmployee_shouldDeleteEmployee() {
         // Arrange
         Long id = 1l;
-        repository = mock(EmployeeRepository.class);
-        employeeService.repository = repository;
+        Employee employee1 = new Employee();
+        Employee employee2 = new Employee();
+        List<Employee> employees = new ArrayList<>();
+        employees.add(employee1);
+        employees.add(employee2);
+        doAnswer((i) -> {
+            employees.remove(employee1);
+            return true;
+        }).when(repository).deleteById(id);
 
         // Act
         employeeService.deleteEmployee(id);
 
         // Assert
-        assertNull(employeeService.searchAnEmployeeById(id));
+        assertEquals(employees.size(), 1);
     }
 
     @Test

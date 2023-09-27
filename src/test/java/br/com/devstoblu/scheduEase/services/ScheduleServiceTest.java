@@ -1,7 +1,6 @@
 package br.com.devstoblu.scheduEase.services;
 
 import br.com.devstoblu.scheduEase.enums.TimeGrid;
-import br.com.devstoblu.scheduEase.models.dtos.EmployeeDTO;
 import br.com.devstoblu.scheduEase.models.dtos.ScheduleDTO;
 import br.com.devstoblu.scheduEase.models.entities.Employee;
 import br.com.devstoblu.scheduEase.models.entities.Schedule;
@@ -14,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;

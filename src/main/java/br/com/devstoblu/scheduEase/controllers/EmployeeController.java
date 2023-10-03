@@ -3,7 +3,7 @@ package br.com.devstoblu.scheduEase.controllers;
 
 import br.com.devstoblu.scheduEase.models.dtos.EmployeeDTO;
 import br.com.devstoblu.scheduEase.services.EmployeeService;
-
+import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -15,6 +15,8 @@ import org.springframework.beans.BeanUtils;
 import java.util.List;
 
 @Tag(name = "Funcionário", description = "Endpoints relacionados ao Funcionário") // customizando UI do Swagger
+@Server(url = "http://localhost:8080", description = "Servidor local de desenvolvimento")
+@Server(url = "https://scheduease-production.up.railway.app", description = "Servidor de produção")
 @RestController
 @RequestMapping(value = "/api/employees")
 public class EmployeeController {

@@ -7,7 +7,11 @@
   "servers": [
     {
       "url": "http://localhost:8080",
-      "description": "Generated server url"
+      "description": "Servidor local de desenvolvimento"
+    },
+    {
+      "url": "https://scheduease-production.up.railway.app",
+      "description": "Servidor de produção"
     }
   ],
   "tags": [

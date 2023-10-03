@@ -60,7 +60,7 @@ public class EmployeeController {
         }
     }
 
-    @Operation(description = "Lista todos os Funcionários cadastrados", method = "GET")// customizando UI do Swagger
+    @Operation(description = "Lista todos os Funcionários cadastrados")// customizando UI do Swagger
     @GetMapping("/list-all")
     public List<EmployeeDTO> listEmployees() {
         return employeeService.listEmployees();

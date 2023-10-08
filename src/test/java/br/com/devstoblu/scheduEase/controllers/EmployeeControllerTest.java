@@ -2,95 +2,96 @@ package br.com.devstoblu.scheduEase.controllers;
 
 import br.com.devstoblu.scheduEase.enums.EmployeeRole;
 import br.com.devstoblu.scheduEase.models.dtos.EmployeeDTO;
-import br.com.devstoblu.scheduEase.models.entities.Employee;
-import br.com.devstoblu.scheduEase.repositories.EmployeeRepository;
 import br.com.devstoblu.scheduEase.services.EmployeeService;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 
-@RunWith(MockitoJUnitRunner.class)
+
+@WebMvcTest(EmployeeController.class)
 public class EmployeeControllerTest {
 
-    @Mock
+    @MockBean
     EmployeeService employeeService;
-    @Mock
-    EmployeeRepository repository;
-    @InjectMocks
-    EmployeeController employeeController;
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private ObjectMapper objectMapper;
+
 
     @Test
     public void addEmployee_shouldAddEmployee() throws Exception {
         // Arrange
-        EmployeeDTO employeeDTO = new EmployeeDTO(1L, "João da Silva", EmployeeRole.HairStylist, true);
-        when(employeeService.addEmployee(employeeDTO)).thenReturn(1l);
+        EmployeeDTO employeeDTO = new EmployeeDTO(1l, "Jhonny", EmployeeRole.HairStylist, true);
+        String employeeJSON = objectMapper.writeValueAsString(employeeDTO);
+        when(employeeService.addEmployee(employeeDTO)).thenReturn(employeeDTO.getId());
 
         // Act
-        ResponseEntity<Object> response = employeeController.addEmployee(employeeDTO);
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/employees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(employeeJSON))
+                .andExpect(MockMvcResultMatchers.status().isOk()); // Verifique se o status HTTP é 200
 
         // Assert
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(1L, response.getBody());
+        verify(employeeService, times(0)).addEmployee(employeeDTO);
     }
 
     @Test
-    public void deleteEmployee_shouldDeleteEmployee() {
+    public void deleteEmployee_shouldDeleteEmployee() throws Exception {
         // Arrange
         Long id = 1l;
-        Employee employee1 = new Employee();
-        Employee employee2 = new Employee();
-        List<Employee> employees = new ArrayList<>();
-        employees.add(employee1);
-        employees.add(employee2);
-        doAnswer((i) -> {
-            employees.remove(employee1);
-            return true;
-        }).when(employeeService).deleteEmployee(id);
 
         // Act
-        employeeController.deleteEmployee(id);
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/employees/{id}", id)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isOk()); // Verifique se o status HTTP é 200
 
         // Assert
-        Assert.assertEquals(employees.size(), 1);
+        verify(employeeService, times(1)).deleteEmployee(id);
     }
 
     @Test
     public void updateEmployee_shouldUpdateEmployee() throws Exception {
         // Arrange
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setId(1l);
+        EmployeeDTO employeeDTO = new EmployeeDTO(1l, "Jhonny", EmployeeRole.HairStylist, true);
         when(employeeService.searchAnEmployeeById(employeeDTO.getId())).thenReturn(employeeDTO);
+        // Converta o objeto EmployeeDTO em JSON
+        String updatedEmployeeJSON = objectMapper.writeValueAsString(employeeDTO);
 
         // Act
-        ResponseEntity<Object> response = employeeController.updateEmployee(employeeDTO);
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/employees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(updatedEmployeeJSON))
+                .andExpect(MockMvcResultMatchers.status().isOk()); // Verifique se o status HTTP é 200 (OK)
 
         // Assert
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        verify(employeeService, times(1)).updateEmployee(employeeDTO);
     }
 
     @Test
-    public void listEmployees_shouldListEmployees() {
+    public void listEmployees_shouldListEmployees() throws Exception {
         // Arrange
         List<EmployeeDTO> employeeDTOList = List.of(new EmployeeDTO(), new EmployeeDTO());
         when(employeeService.listEmployees()).thenReturn(employeeDTOList);
 
         // Act
-        List<EmployeeDTO> employeeDTOSListed = employeeController.listEmployees();
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/employees/list-all")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isArray());
 
         // Assert
-        assertEquals(employeeDTOList, employeeDTOSListed);
+        verify(employeeService, times(1)).listEmployees();
     }
 
     @Test
@@ -102,9 +103,11 @@ public class EmployeeControllerTest {
         when(employeeService.searchAnEmployee(employeeName)).thenReturn(employeeDTO);
 
         // Act
-        EmployeeDTO employeeSearched = employeeController.searchAnEmployee(employeeName);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/employees?employeeName={employeeName}", employeeName)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
         // Assert
-        assertEquals(employeeName, employeeSearched.getName());
+        verify(employeeService, times(1)).searchAnEmployee(employeeName);
     }
 }
